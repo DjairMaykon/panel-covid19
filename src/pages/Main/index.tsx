@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { getCountry, ApiResponse } from '@service/api'
 import { ContainerStyled } from './style'
-import { Board } from './components/Board'
+import Board from './components/Board'
 
 function Main() {
   const [data, setData] = useState<ApiResponse | null>(null)
@@ -17,7 +17,13 @@ function Main() {
 
   return (
     <ContainerStyled>
-      <Board cases={data?.cases} />
+      <Board
+        cases={data?.cases}
+        deaths={data?.deaths}
+        recovered={data?.recovered}
+        todayCases={data?.todayCases}
+        todayDeaths={data?.todayDeaths}
+      />
     </ContainerStyled>
   )
 }
