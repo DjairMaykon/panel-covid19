@@ -6,10 +6,21 @@ const headers: RequestInit = {
   cache: 'default',
 }
 
-function getCountry(country: string) {
+export function getCountry(country: string) {
   return fetch(`${path}/${country}`, headers).then(response => response.json())
 }
 
-export default {
-  getCountry,
+export type ApiResponse = {
+  active: number
+  cases: number
+  casesPerOneMillion: number
+  country: string
+  critical: number
+  deaths: number
+  deathsPerOneMillion: number
+  recovered: number
+  testsPerOneMillion: number
+  todayCases: number
+  todayDeaths: number
+  totalTests: number
 }
