@@ -1,4 +1,5 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+import Main from '@pages/Main'
 
 import { GlobalStyle } from './commons/styles/global-style'
 
@@ -9,7 +10,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyle />
-      <div>teste</div>
+      <Main />
     </ThemeProvider>
   )
 }
