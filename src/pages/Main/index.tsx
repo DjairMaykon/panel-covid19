@@ -26,7 +26,12 @@ export function Main() {
   return (
     <ContainerStyled>
       <div className="mb-2">
-        <Panel updateAt={updateAt} onChange={handleChange} country={country} />
+        <Panel
+          recovered={data?.recovered}
+          updateAt={updateAt}
+          onChange={handleChange}
+          country={country}
+        />
       </div>
       <Board
         cases={data?.cases}

@@ -1,13 +1,46 @@
-import { Card, Typography, Select, MenuItem } from '@components/index'
+import { Card, Typography, Button, Select, MenuItem } from '@components/index'
 import { Countries, CountryType } from '@commons/constants/countries'
 import { CardPanelContentStyled, ItemStyled, HeaderStyled } from './style'
+
+const navigatorHasShare = navigator.share
 
 type PanelProps = {
   onChange: (country: CountryType) => void
   country: CountryType
   updateAt: string
+  recovered?: number
 }
-export function Panel({ onChange, country, updateAt }: PanelProps) {
+export function Panel({ onChange, country, updateAt, recovered }: PanelProps) {
+  const textCovid19 = `País: ${country} - recuperados: ${recovered}`
+
+  const copyInfo = () => {
+    navigator.clipboard.writeText(textCovid19)
+  }
+
+  const shareInfo = () => {
+    navigator.share({
+      title: `Dados do Covid19 - ${country}`,
+      text: textCovid19,
+      url: 'https://covid19dio.netlify.app/',
+    })
+  }
+
+  const renderShareButton = (
+    <div>
+      <Button variant="contained" color="primary" onClick={shareInfo}>
+        Compartilhar
+      </Button>
+    </div>
+  )
+
+  const renderCopyButton = (
+    <div>
+      <Button variant="contained" color="primary" onClick={copyInfo}>
+        Copiar
+      </Button>
+    </div>
+  )
+
   return (
     <Card>
       <CardPanelContentStyled>
@@ -41,6 +74,7 @@ export function Panel({ onChange, country, updateAt }: PanelProps) {
             </Select>
           </div>
         </div>
+        {navigatorHasShare ? renderShareButton : renderCopyButton}
       </CardPanelContentStyled>
     </Card>
   )
