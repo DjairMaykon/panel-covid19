@@ -1,22 +1,33 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getCountry, ApiResponse } from '@service/api'
 import { ContainerStyled } from './style'
-import Board from './components/Board'
+import { CountryType } from '@commons/constants/countries'
+import { Board } from './components/Board'
+import { Panel } from './components/Panel'
 
-function Main() {
+export function Main() {
   const [data, setData] = useState<ApiResponse | null>(null)
-  const [country, setCountry] = useState<string>('brazil')
+  const [country, setCountry] = useState<CountryType>('brazil')
+  const updateAt = new Date().toLocaleString()
 
-  const getCovidData = useCallback((country: string) => {
+  const getCovidData = useCallback((country: CountryType) => {
     getCountry(country).then((data: ApiResponse) => setData(data))
   }, [])
 
   useEffect(() => {
+    setData(null)
     getCovidData(country)
-  }, [getCovidData, setCountry])
+  }, [getCovidData, country])
+
+  const handleChange = (target: CountryType) => {
+    setCountry(target)
+  }
 
   return (
     <ContainerStyled>
+      <div className="mb-2">
+        <Panel updateAt={updateAt} onChange={handleChange} country={country} />
+      </div>
       <Board
         cases={data?.cases}
         deaths={data?.deaths}
@@ -27,5 +38,3 @@ function Main() {
     </ContainerStyled>
   )
 }
-
-export default memo(Main)

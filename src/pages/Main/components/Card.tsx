@@ -1,4 +1,4 @@
-import { memo, ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { Card as CardUI } from '../../../components'
 import { LabelStyled, ValueStyled, CardContentStyled } from './style'
 
@@ -7,7 +7,7 @@ type CardProps = {
   label: string | ReactElement
   color: string
 }
-function Card({ value, label, color }: CardProps) {
+export function Card({ value, label, color }: CardProps) {
   return (
     <CardUI>
       <CardContentStyled color={color}>
@@ -17,5 +17,3 @@ function Card({ value, label, color }: CardProps) {
     </CardUI>
   )
 }
-
-export default memo(Card)

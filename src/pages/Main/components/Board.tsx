@@ -1,6 +1,5 @@
-import { memo } from 'react'
 import { Grid, Skeleton } from '@components/index'
-import Card from './Card'
+import { Card } from './Card'
 
 type BoardProps = {
   cases?: number
@@ -9,7 +8,7 @@ type BoardProps = {
   deaths?: number
   todayCases?: number
 }
-function Board(data: BoardProps) {
+export function Board(data: BoardProps) {
   const { cases, todayDeaths, recovered, deaths, todayCases } = data
 
   const getValue = (value?: number) =>
@@ -51,5 +50,3 @@ function Board(data: BoardProps) {
     </Grid>
   )
 }
-
-export default memo(Board)
